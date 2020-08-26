@@ -16,13 +16,23 @@ function createGridItem() {
     newDiv.classList.add("grid-item");
     //Shade each grid item on mouseover
     newDiv.addEventListener("mouseover", shade);
+    console.log(newDiv.style.backgroundColor);
     //Make each grid item a child of the grid container
     gridContainer.appendChild(newDiv);
 }
 
-//Shade a given grid item
+//Set the shade of a given grid item
 function shade() {
-    this.classList.add("grid-item-shaded");
+    if(!(this.style.backgroundColor)) {
+        this.style.backgroundColor = "rgb(10,10,10,0.5)";
+    } else {
+        this.style.backgroundColor = "rgb(10,10,10,1.0)";
+    }
+    console.log(this.style.backgroundColor);
+    // this.classList.add("grid-item-shaded");
+    // this.style.backgroundColor = "rgb(10,10,10,0.5)";
+    
+    // console.log(this.getAttribute("background-color"));
 }
 
 //Clear all shaded grid items
