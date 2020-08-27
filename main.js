@@ -23,7 +23,6 @@ function createGridItem() {
 
 //Set the shade of a given grid item
 function shade() {
-
     if(!(this.style.backgroundColor)) {
         this.style.backgroundColor = "rgba(10, 10, 10, 0.1)";
         // this.style.backgroundColor = "#0a0a0a" + hexAlphaConvert(10);
@@ -39,9 +38,9 @@ function shade() {
 
 //Clear all shaded grid items
 function clearShading() {
-    const shaded = document.querySelectorAll(".grid-item-shaded");
-    shaded.forEach(element => {
-        element.classList.remove("grid-item-shaded");
+    const gridItems = document.querySelectorAll(".grid-item");
+    gridItems.forEach(element => {
+        element.style.backgroundColor = null;
     })
 }
 
