@@ -23,10 +23,12 @@ function createGridItem() {
 
 //Set the shade of a given grid item
 function shade() {
+
     if(!(this.style.backgroundColor)) {
-        this.style.backgroundColor = "rgb(10,10,10,0.5)";
+        this.style.backgroundColor = "rgba(10, 10, 10, 0.1)";
+        // this.style.backgroundColor = "#0a0a0a" + hexAlphaConvert(10);
     } else {
-        this.style.backgroundColor = "rgb(10,10,10,1.0)";
+        this.style.backgroundColor = incrementAlpha(this.style.backgroundColor, 0.1);
     }
     console.log(this.style.backgroundColor);
     // this.classList.add("grid-item-shaded");
@@ -45,7 +47,7 @@ function clearShading() {
 
 //Prompt the user for grid size
 function promptSize() {
-    return prompt("Test");
+    return prompt("Grid size?");
 }
 
 //Delete all grid items
@@ -76,4 +78,50 @@ function initialiseGrid(size) {
     }
 }
 
+//From a given background-color property in rgba format, get the alpha value as a number
+function getAlpha(bgColor) {
+    if(bgColor.slice(0, 4) !== "rgba") {
+        return false;
+    } else {
+        const alpha = bgColor.slice(-4, -1);
+        return Number(alpha);
+    }
+}
 
+//Given a background color in rgba format, return with alpha increased by a given step
+function incrementAlpha(bgColor, step) {
+    if(!getAlpha(bgColor)) {
+        return bgColor;
+    }
+    const startAlpha = getAlpha(bgColor);
+    const newAlpha = (startAlpha + step).toFixed(1);
+    const newColor = bgColor.slice(0, -4) + newAlpha + ")";
+    return newColor;
+}
+
+
+
+/* //Redundant functions
+//Convert a given number to %alpha (rounded up) in hexadecimal
+function hexAlphaConvert(percentage){
+    const val = Math.ceil(255 * (percentage / 100));
+    let hex = val.toString(16);
+    return hex;
+}
+
+//From a string representing background-color in hexadecimal, get the alpha%
+function getAlphaPercent(bgColor) {
+    const hex = bgColor.slice(-2);
+    const val = parseInt(hex, 16);
+    const percentage = Math.floor(val / 255 * 100);
+    return percentage;
+}
+
+//Given a background color with an alpha value in hex, return with the alpha% incremented by a given step
+function incrementAlpha(bgColor, step) {
+    const noAlpha = bgColor.slice(0, -2);
+    let alphaPercent = getAlphaPercent(bgColor);
+    alphaPercent += step;
+    const newAlpha = hexAlphaConvert(alphaPercent);
+    return(noAlpha + newAlpha);
+} */
